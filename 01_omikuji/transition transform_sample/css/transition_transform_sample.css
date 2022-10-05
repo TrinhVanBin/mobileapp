@@ -1,0 +1,391 @@
+@charset "utf-8";
+
+html {
+    /* ブラウザのデフォルトが16px */
+    /* デフォルトの16pxの代わりに1emが10pxになるように調整（ちょうせい） */
+    font-size: 65%;
+  }
+  
+body{
+    line-height: 1.5;
+    color: rgb(73, 72, 72);
+    font-size: 1.6rem; /* 16px */
+    font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
+    text-align: center;
+    background-color:lightgrey;
+}
+
+header, main, footer, h1, h2, h3, p, div, .container01, .filler01 {
+    margin: 0.5em 0em 0em 0em;
+    padding: 0.1em;
+}
+/*****************************/
+/* レスポンシブ対応           */
+/*****************************/
+@media screen and (max-width: 480px){
+    h1{
+        font-size: 100%;
+    }
+    .cat-container01, .cat-container02, .cat-container03{
+        flex-flow: column;
+    }
+}
+
+/*****************************/
+/* 見出し（みだし）           */
+/*****************************/
+h1 {
+    color: rgb(181, 242, 252);
+    background-color:  #46aef7;
+}
+
+h2 {
+    padding-left: 0.5em;
+    border-left: solid 0.5em darkgray;
+    text-align: left;
+}
+/*****************************/
+/* Font Awesome              */
+/* Twitter,Facebookなどの     */
+/* アイコン用フォント          */
+/*****************************/
+/* link */
+.font00{
+    color: rgb(29, 161, 242);
+    font-size: 1em;
+}
+/*****************************/
+/* セクション                 */
+/*****************************/
+.container01 {
+    border-radius: 0.5em 1.5em;
+    background-color: lemonchiffon;
+}
+.container02 {
+    border-radius: 0.5em 1.5em;
+    background-color: sandybrown;
+}
+.container03 {
+    border-radius: 0.5em 1.5em;
+    background-color: salmon;
+}
+
+/*****************************/
+/* class="cat-container01"   */
+/*****************************/
+/* Touch Cat! partⅠ */
+.cat-container01{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.cat-item01{
+    position: relative;
+    width: 16em;
+    height: 16em;
+    margin-left:2em;
+    margin-right: 2em;
+    overflow: hidden;
+}
+.cat-item01 img{
+    width: 16em;
+    height: auto;
+}
+.cat-item01 p{
+    position: absolute;
+    top: 0;
+    right: 2em;
+    color: white;
+}
+
+.cat-item01:hover img {
+    transform: scale(1.5);
+    transition: all ease 1s;
+}
+
+/*****************************/
+/* class="cat-container02"   */
+/*****************************/
+/* Touch Cat! partⅡ */
+.cat-container02{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.cat-block02{
+    position: relative;
+    width: 16em;
+    height: 22em;
+    margin-left:2em;
+    margin-right: 2em;
+}
+.cat-block02 p {
+    font-size: 0.7em;
+    text-align: center;
+}
+
+/*----- 画像をマスクして文字拡大 -----*/
+.cat-item02_1{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 16em;
+    height: 16em;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none; 
+}
+.cat-item02_1 img{
+    width: 16em;
+    height: 16em;
+    object-fit: cover;
+}
+.cat-item02_1 .caption {
+    padding-top: 7em;
+    font-size: 1em;
+    text-align: center;
+	color:	white;
+}
+
+.cat-item02_1  .mask {
+	position: absolute;	/* 絶対位置指定 */
+	width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-color: rgba(0,0,0,0.7);	/* マスクは半透明 */
+	transition: all 0.5s ease-out;
+    opacity: 0; /* マスクを表示しない */
+}
+.cat-item02_1:hover  .mask {
+    transform: scale(4);   /* 4倍に拡大 */
+	opacity: 1; /* マスクを表示する */
+}
+
+/*----- 上からスライドして画像をマスク -----*/
+.cat-item02_2{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 16em;
+    height: 16em;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none; 
+}
+.cat-item02_2 img{
+    width: 16em;
+    height: 16em;
+    object-fit: cover;
+}
+.cat-item02_2 .caption {
+    padding-top: 7em;
+    font-size: 1em;
+    text-align: center;
+	color:	white;
+}
+.cat-item02_2  .mask {
+	position: absolute;	/* 絶対位置指定 */
+	width: 100%;
+	height: 100%;
+	top: -110%;	/* 枠の上に置いて表示させない */
+    left: 0;
+    margin: 0;
+	background-color: rgba(0,0,0,0.7);	/* マスクは半透明 */
+	transition: all 1s ease;
+}
+.cat-item02_2:hover .mask {
+	top: 0;	/* 下に降りてくるように見せる */
+}
+
+
+/*----- 横に１８０度回転して画像をマスク -----*/
+.cat-item02_3{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 16em;
+    height: 16em;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none; 
+}
+.cat-item02_3 img{
+    width: 16em;
+    height: 16em;
+    object-fit: cover;
+}
+.cat-item02_3 .caption {
+    padding-top: 7em;
+    font-size: 1em;
+    text-align: center;
+	color:	white;
+}
+.cat-item02_3  .mask {
+	position: absolute;	/* 絶対位置指定 */
+    width: 100%;
+	height: 100%;
+	top: 0;	/* 枠の上に置いて表示させない */
+    left: 0;
+    margin: 0;
+    background-color: rgba(0,0,0,0.7);	/* マスクは半透明 */
+    transform:	rotateY(-180deg);
+	transition: all 3s ease;
+    opacity: 0; /* 表示させない */
+}
+.cat-item02_3:hover .mask {
+	transform: rotateY(0deg) scale(3);
+    opacity: 1; /* ホバーで表示する */
+}
+/*****************************/
+/* class="cat-container03"   */
+/*****************************/
+/* Touch Cat! partⅢ */
+.cat-container03{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+/*----- 画像をマスクして文字拡大 -----*/
+.cat-item03_1{
+    position: relative;
+    width: 16em;
+    height: 16em;
+    margin-left:2em;
+    margin-right: 2em;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none; 
+}
+.cat-item03_1 img{
+    width: 16em;
+    height: 16em;
+    object-fit: cover;
+}
+.cat-item03_1 .caption {
+    padding-top: 7em;
+    font-size: 1em;
+    text-align: center;
+	color:	white;
+}
+
+.cat-item03_1  .mask {
+	position: absolute;	/* 絶対位置指定 */
+	width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-color: rgba(255,192,203, 0.7);	/* マスクは半透明 */
+	transition: all 0.5s ease-out;
+    opacity: 0; /* マスクを表示しない */
+}
+.cat-item03_1:hover  .mask {
+    transform: scale(4);   /* 4倍に拡大 */
+	opacity: 1; /* マスクを表示する */
+}
+
+
+/*----- 上からスライドして画像をマスク -----*/
+.cat-item03_2{
+    position: relative;
+    width: 16em;
+    height: 16em;
+    margin-left:2em;
+    margin-right: 2em;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none; 
+}
+.cat-item03_2 img{
+    width: 16em;
+    height: 16em;
+    object-fit: cover;
+}
+.cat-item03_2 .caption {
+    padding-top: 7em;
+    font-size: 1em;
+    text-align: center;
+	color:	white;
+}
+.cat-item03_2  .mask {
+	position: absolute;	/* 絶対位置指定 */
+	width: 100%;
+	height: 100%;
+	top: -110%;	/* 枠の上に置いて表示させない */
+    left: 0;
+    margin: 0;
+    background-color: rgba(255,192,203, 0.7);	/* マスクは半透明 */
+	transition: all 1s ease;
+}
+.cat-item03_2:hover .mask {
+	top: 0;	/* 下に降りてくるように見せる */
+}
+
+
+/*----- 横に１８０度回転して画像をマスク -----*/
+.cat-item03_3{
+    position: relative;
+    width: 16em;
+    height: 16em;
+    margin-left:2em;
+    margin-right: 2em;
+    overflow: hidden;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none; 
+}
+.cat-item03_3 img{
+    width: 16em;
+    height: 16em;
+    object-fit: cover;
+}
+.cat-item03_3 .caption {
+    padding-top: 7em;
+    font-size: 1em;
+    text-align: center;
+	color:	white;
+}
+.cat-item03_3  .mask {
+	position: absolute;	/* 絶対位置指定 */
+    width: 100%;
+	height: 100%;
+	top: 0;	/* 枠の上に置いて表示させない */
+    left: 0;
+    margin: 0;
+    border-radius: 50%;
+    background-color: rgba(255,192,203, 0.7);	/* マスクは半透明 */
+    transform:	rotateY(-180deg);
+	transition: all 3s ease;
+    opacity: 0; /* 表示させない */
+}
+.cat-item03_3:hover .mask {
+    border-radius: 50%;
+	transform: rotateY(0deg) scale(3);
+    opacity: 1; /* ホバーで表示する */
+}
+
+/*****************************/
+/* フッター                   */
+/*****************************/
+footer {
+    color: whitesmoke;
+    text-align: center;
+    background-color: #46aef7;
+}
+/*****************************/
+/* 文字スペース               */
+/*****************************/
+.mgn-01{
+    margin-left: 1em;
+    margin-right: 1em;
+}
