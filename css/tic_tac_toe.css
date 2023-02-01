@@ -120,6 +120,12 @@ footer> p {
     .btn-container{
         padding-top: 2px;
     }
+    header{
+        font-size: 24px;
+    }
+    #msgtext {
+        font-size: 20px;
+    }
 }
 .js-pen-checked::before{
     position: absolute;
@@ -140,6 +146,9 @@ footer> p {
     content: '';
     background-image: url(../img/whitebear.jpg);
     background-size: contain;
+}
+.js-clickable{
+    content: '';
 }
 .js-unclickable{
     pointer-events: none;

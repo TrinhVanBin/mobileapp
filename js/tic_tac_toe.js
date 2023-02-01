@@ -34,8 +34,8 @@ const lineArray =[line1, line2, line3, line4, line5, line6, line7, line8];
 
 let winningLine = null;
 
-const msgtxt1 = '<p class="image"><img src ="img/penguins.jpg" width=61px height=61px></p><p class="text">Penguins Attack!</p>';
-const msgtxt2 = '<p class="image"><img src ="img/whitebear.jpg" width=61px height=61px></p><p class="text">WhiteBear Attack!</p>';
+const msgtxt1 = '<p class="image"><img src ="img/penguins.jpg" width=61px height=61px></p><p class="text">Penguins Attack!(you turn)</p>';
+const msgtxt2 = '<p class="image"><img src ="img/whitebear.jpg" width=61px height=61px></p><p class="text">WhiteBear Attack!(computer turn)</p>';
 const msgtxt3 = '<p class="image"><img src ="img/penguins.jpg" width=61px height=61px></p><p class="text animate__animated animate__lightSpeedInRight">penguins win!</p>';
 const msgtxt4 = '<p class="image"><img src ="img/whitebear.jpg" width=61px height=61px></p><p class="text animate__animated animate__lightSpeedInLeft">WhiteBear win!</p>';
 const msgtxt5 = '<p class="image"><img src ="img/penguins.jpg" width=61px height=61px><img src ="img/whitebear.jpg" width=61px height=61px></p><p class="text animate__bounceIn">Draw!</p>';
@@ -44,48 +44,30 @@ let gameSound = ["sound/click_sound1.mp3","sound/click_sound2.mp3","sound/penwin
 window.addEventListener("DOMContentLoaded",
     function(){
     setMessage("pen-turn");
+    squaresArray.forEach(function(square){
+        square.classList.add("js-clickable");
+    });
     },false
 );
 
-a_1.addEventListener("click",
-    function(){
-    isSelect(a_1);
-    },false
-);
-a_2.addEventListener("click", () =>
-{
-    isSelect(a_2);
-});
-a_3.addEventListener("click", () =>
-{
-    isSelect(a_3);
-});
-b_1.addEventListener("click", () =>
-{
-    isSelect(b_1);
-});
-b_2.addEventListener("click", () =>
-{
-    isSelect(b_2);
-});
-b_3.addEventListener("click", () =>
-{
-    isSelect(b_3);
-});
-c_1.addEventListener("click", () =>
-{
-    isSelect(c_1);
-});
-c_2.addEventListener("click", () =>
-{
-    isSelect(c_2);
-});
-c_3.addEventListener("click", () =>
-{
-    isSelect(c_3);
-});
 
+squaresArray.forEach(function(square){
+    square.addEventListener('click', () =>{
+        let gameOverFlg = isSelect(square);
+        if(gameOverFlg === "0"){
+            const squaresBox = document.getElementById("squaresBox");
+            squaresBox.classList.add("js-unclickable");
+            setTimeout(
+                function(){
+                    bearTurn();
+                },
+                "2000"
+            );
+        }
+    });
+});
 function isSelect(selectSquare) {
+    let gameOverFlg ="0";
     if(flag === "pen-flag") {
         let music = new Audio(gameSound[0]);
         music.currentTime = 0;
@@ -93,23 +75,25 @@ function isSelect(selectSquare) {
 
        selectSquare.classList.add("js-pen-checked"); 
        selectSquare.classList.add("js-unclickable");
+       selectSquare.classList.remove("js-clickable");
        if (isWinner("penguins")){
            setMessage("pen-win") ;
            gameOver("penguins");
-           return;
+           return gameOverFlg = "1";
        }
        setMessage("bear-turn");
-       flag = "bear-flag"
+       flag = "bear-flag";
     }else{
         let music = new Audio(gameSound[1]);
         music.currentTime = 0;
         music.play();
         selectSquare.classList.add("js-bear-checked");
         selectSquare.classList.add("js-unclickable"); 
+        selectSquare.classList.remove("js-clickable");
         if (isWinner("bear")){
             setMessage("bear-win") ;
             gameOver("bear");
-            return;
+            return gameOverFlg = "1";
         }
         setMessage("pen-turn");
         flag = "pen-flag"
@@ -119,7 +103,9 @@ function isSelect(selectSquare) {
     if(counter === 0) {
         setMessage("draw");
         gameOver("draw");
+        return gameOverFlg = "1";
     }
+    return gameOverFlg = "0";
 }
 function setMessage(id) {
     switch (id) {
@@ -180,9 +166,9 @@ function gameOver(status){
     let music = new Audio(w_sound);
     music.currentTime = 0;
     music.play();
-    squaresArray.forEach(function (square) {
-        square.classList.add("js-unclickable");
-    });
+    
+    squaresBox.classList.add("js-unclickable");
+    
 
     newgamebtn_display.classList.remove("js-hidden");
 
@@ -228,10 +214,24 @@ newgamebtn.addEventListener("click",function(){
         square.classList.remove("js-unclickable");
         square.classList.remove("js-pen_highLight");
         square.classList.remove("js-bear_highLight");
+        square.classList.add("js-clickable");
     });
+    squaresBox.classList.remove("js-unclickable");
 
     setMessage("pen-turn");
     newgamebtn_display.classList.add("js-hidden");
 
     $(document).snowfall("clear");
 });
+function bearTurn(){
+    let gameOverFlg ="0";
+    const bearSquare = squaresArray.filter(function(square){
+        return square.classList.contains("js-clickable");
+    })
+    let n = Math.floor(Math.random() * bearSquare.length);
+    gameOverFlg = isSelect(bearSquare[n]);
+
+    if(gameOverFlg === "0"){
+        squaresBox.classList.remove("js-unclickable");
+    }
+}
