@@ -44,6 +44,17 @@ header{
 .game-container{
     padding: 40px 0;
 }
+.message-container {
+    margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+
+.js-hidden{
+    display: none;
+}
 .squares-container{
     display: flex;
     flex-wrap: wrap;
@@ -103,4 +114,27 @@ footer> p {
     .btn-container{
         padding-top: 2px;
     }
+}
+.js-pen-checked::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 61px;
+    height: 61px;
+    content: '';
+    background-image: url(../img/penguins.jpg);
+    background-size: contain;
+}
+.js-bear-checked::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 61px;
+    height: 61px;
+    content: '';
+    background-image: url(../img/whitebear.jpg);
+    background-size: contain;
+}
+.js-unclickable{
+    pointer-events: none;
 }
