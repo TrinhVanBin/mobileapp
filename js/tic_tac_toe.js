@@ -39,6 +39,8 @@ const msgtxt2 = '<p class="image"><img src ="img/whitebear.jpg" width=61px heigh
 const msgtxt3 = '<p class="image"><img src ="img/penguins.jpg" width=61px height=61px></p><p class="text animate__animated animate__lightSpeedInRight">penguins win!</p>';
 const msgtxt4 = '<p class="image"><img src ="img/whitebear.jpg" width=61px height=61px></p><p class="text animate__animated animate__lightSpeedInLeft">WhiteBear win!</p>';
 const msgtxt5 = '<p class="image"><img src ="img/penguins.jpg" width=61px height=61px><img src ="img/whitebear.jpg" width=61px height=61px></p><p class="text animate__bounceIn">Draw!</p>';
+
+let gameSound = ["sound/click_sound1.mp3","sound/click_sound2.mp3","sound/penwin_sound.mp3","sound/bearwin_sound.mp3","sound/draw_sound.mp3"];
 window.addEventListener("DOMContentLoaded",
     function(){
     setMessage("pen-turn");
@@ -85,6 +87,10 @@ c_3.addEventListener("click", () =>
 
 function isSelect(selectSquare) {
     if(flag === "pen-flag") {
+        let music = new Audio(gameSound[0]);
+        music.currentTime = 0;
+        music.play();
+
        selectSquare.classList.add("js-pen-checked"); 
        selectSquare.classList.add("js-unclickable");
        if (isWinner("penguins")){
@@ -95,6 +101,9 @@ function isSelect(selectSquare) {
        setMessage("bear-turn");
        flag = "bear-flag"
     }else{
+        let music = new Audio(gameSound[1]);
+        music.currentTime = 0;
+        music.play();
         selectSquare.classList.add("js-bear-checked");
         selectSquare.classList.add("js-unclickable"); 
         if (isWinner("bear")){
@@ -156,6 +165,21 @@ function JudgLine(targetArray, idArray) {
     });
 }
 function gameOver(status){
+    let w_sound
+    switch (status) {
+        case "penguins":
+            w_sound =gameSound[2];
+            break;
+        case "bear":
+            w_sound =gameSound[3];    
+            break;
+        case "draw":
+             w_sound =gameSound[4];    
+            break;       
+    }
+    let music = new Audio(w_sound);
+    music.currentTime = 0;
+    music.play();
     squaresArray.forEach(function (square) {
         square.classList.add("js-unclickable");
     });
